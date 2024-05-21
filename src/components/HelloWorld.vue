@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-col cols="12" md="8">
+      <v-col>
         <v-card>
           <v-card-title class="justify-center">Chatbot</v-card-title>
           <v-divider></v-divider>
@@ -39,7 +39,7 @@ export default {
       userMessage: '',
       messages: [],
       apiKey: 'gHE4zDc97ibl1kRcvNpfsYxFIFry4FUY', // Reemplaza con tu clave API
-      apiUrl: 'https://mlmachinedev-dnkjo.eastus.inference.ml.azure.com/score', // Cambiado para usar el proxy
+      apiUrl: '/api', // Cambiado para usar el proxy
     };
   },
   methods: {
@@ -51,8 +51,10 @@ export default {
 
       // Preparar el cuerpo de la solicitud
       const requestBody = {
-        data: this.userMessage, // Ajusta esto según el formato esperado por tu endpoint
+        question: this.userMessage, // Ajusta esto según el formato esperado por tu endpoint
       };
+
+      console.log(this.userMessage) 
 
       const requestHeaders = new Headers({
         "Content-Type": "application/json",
@@ -60,6 +62,8 @@ export default {
         "azureml-model-deployment": "mlmachinedev-dnkjo-1"
       });
 
+      console.log(JSON.stringify(requestBody)); 
+      
       try {
         const response = await fetch(this.apiUrl, {
           method: "POST",
@@ -70,7 +74,8 @@ export default {
         if (response.ok) {
           const json = await response.json();
           // Añadir la respuesta del bot a la lista de mensajes
-          this.messages.push({ text: json.response, isUser: false }); // Ajusta esto según el formato de la respuesta
+          console.log(json)
+          this.messages.push({ text: json.output, isUser: false }); // Ajusta esto según el formato de la respuesta
         } else {
           console.debug(...response.headers);
           console.debug(response.body);
@@ -88,13 +93,13 @@ export default {
 
 <style>
 .chat-container {
-  max-height: 60vh;
+  height: 80vh; /* Ajusta el chat al 90% de la altura de la pantalla */
+  width: 100%; /* Ajusta el chat al 90% del ancho de la pantalla */
   overflow-y: auto;
 }
 .chat-box {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 10px;
+
 }
 .user-message {
   align-self: flex-end;
