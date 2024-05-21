@@ -1,36 +1,35 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col>
-        <v-card>
-          <v-card-title class="justify-center">Chatbot</v-card-title>
-          <v-divider></v-divider>
-          <v-card-text>
+  <div class="container fill-height">
+    <div class="row align-center justify-center">
+      <div class="col">
+        <div class="card">
+          <div class="card-title">Chatbot</div>
+          <hr />
+          <div class="card-text">
             <div class="chat-container">
               <div class="chat-box" v-for="(message, index) in messages" :key="index">
-                <v-chip :class="{'user-message': message.isUser, 'bot-message': !message.isUser}">
+                <div :class="{'user-message': message.isUser, 'bot-message': !message.isUser}">
                   {{ message.text }}
-                </v-chip>
+                </div>
               </div>
             </div>
-          </v-card-text>
-          <v-divider></v-divider>
-          <v-card-actions>
-            <v-text-field
+          </div>
+          <hr />
+          <div class="card-actions">
+            <input
               v-model="userMessage"
               @keyup.enter="sendMessage"
-              label="Type a message"
-              outlined
-              dense
-              hide-details
-            ></v-text-field>
-            <v-btn @click="sendMessage" color="primary">Send</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+              placeholder="Type a message"
+              class="text-field"
+            />
+            <button @click="sendMessage" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+
 
 <script>
 export default {
@@ -39,7 +38,7 @@ export default {
       userMessage: '',
       messages: [],
       apiKey: 'gHE4zDc97ibl1kRcvNpfsYxFIFry4FUY', // Reemplaza con tu clave API
-      apiUrl: '/api', // Cambiado para usar el proxy
+      apiUrl: 'https://mlmachinedev-dnkjo.eastus.inference.ml.azure.com/score', // Cambiado para usar el proxy
     };
   },
   methods: {
@@ -90,23 +89,83 @@ export default {
   },
 };
 </script>
-
 <style>
+.container {
+  display: flex;
+  height: 100vh;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.col {
+  max-width: 90%;
+  width: 100%;
+}
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.card-title {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 8px;
+  align-self: flex-end; /* Alinea los mensajes del usuario a la derecha */
+
+}
+.card-text {
+  margin-bottom: 16px;
+}
 .chat-container {
-  height: 80vh; /* Ajusta el chat al 90% de la altura de la pantalla */
-  width: 100%; /* Ajusta el chat al 90% del ancho de la pantalla */
+  height: 80vh;
+  width: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  
 }
 .chat-box {
   margin-bottom: 10px;
-
 }
 .user-message {
   align-self: flex-end;
   background-color: #e1ffc7;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 70%;
 }
 .bot-message {
   align-self: flex-start;
   background-color: #f1f1f1;
+  padding: 8px;
+  border-radius: 4px;
+  max-width: 70%;
+}
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-field {
+  flex-grow: 1;
+  padding: 8px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.btn {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: #007bff;
 }
 </style>

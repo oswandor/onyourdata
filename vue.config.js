@@ -6,13 +6,5 @@ module.exports = defineConfig({
     vuetify: {
 			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
 		}
-  },  devServer: {
-    proxy: {
-      '/api': {
-        target: 'https://mlmachinedev-dnkjo.eastus.inference.ml.azure.com',
-        changeOrigin: true,
-        pathRewrite: { '^/api': '/score' },
-      },
-    },
-  },
+  }
 })
