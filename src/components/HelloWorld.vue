@@ -38,7 +38,7 @@ export default {
       userMessage: '',
       messages: [],
       apiKey: 'gHE4zDc97ibl1kRcvNpfsYxFIFry4FUY', // Reemplaza con tu clave API
-      apiUrl: 'https://mlmachinedev-dnkjo.eastus.inference.ml.azure.com/score', // Cambiado para usar el proxy
+      apiUrl: '/api', // Cambiado para usar el proxy
     };
   },
   methods: {
@@ -93,6 +93,8 @@ export default {
 .container {
   display: flex;
   height: 100vh;
+  background-color: #222; /* Set background to dark gray */
+  color: #ddd; /* Set text color to light for contrast */
 }
 .row {
   display: flex;
@@ -105,10 +107,11 @@ export default {
   width: 100%;
 }
 .card {
-  border: 1px solid #ddd;
+  border: 1px solid #444; /* Darker border for card */
   border-radius: 8px;
   padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  background-color: #333; /* Darker card background */
 }
 .card-title {
   text-align: center;
@@ -133,17 +136,19 @@ export default {
 }
 .user-message {
   align-self: flex-end;
-  background-color: #e1ffc7;
+  background-color: #444; /* Darker shade for user messages */
   padding: 8px;
   border-radius: 4px;
   max-width: 70%;
+  color: #eee; /* Light text color for user messages */
 }
 .bot-message {
   align-self: flex-start;
-  background-color: #f1f1f1;
+  background-color: #222; /* Even darker shade for bot messages */
   padding: 8px;
   border-radius: 4px;
   max-width: 70%;
+  color: #ddd; /* Light text color for bot messages */
 }
 .card-actions {
   display: flex;
@@ -154,8 +159,10 @@ export default {
   flex-grow: 1;
   padding: 8px;
   margin-right: 8px;
-  border: 1px solid #ddd;
+  color: white;
+  border: 1px solid #444; /* Darker border for input field */
   border-radius: 4px;
+
 }
 .btn {
   padding: 8px 16px;
